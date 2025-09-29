@@ -22,7 +22,7 @@ It helps job seekers find opportunities and employers post job listings with a c
 | Category      | Technologies Used                                  |
 |---------------|-----------------------------------------------------|
 | **Frontend**  | React.js, React Router DOM                          |
-| **Styling**   | TailwindCSS, DaisyUI, ReactIcons, MotionReact, LottieFiles,                                |
+| **Styling**   | TailwindCSS, DaisyUI, ReactIcons, MotionReact, LottieFiles, sweetalert2,                               |
 | **Backend**   | MongoDB|
 | **State Mgmt**| React Context API                                   |
 | **Auth**      | Firebase Authentication (Google, Email/Password)    |
