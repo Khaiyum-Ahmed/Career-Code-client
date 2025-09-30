@@ -1,12 +1,31 @@
 import { NavLink } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext/AuthContext";
+import { use } from "react";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const { user, logOut } = use(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Log Out successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+    }
 
     const links = <>
-     <li><NavLink to="/">Home</NavLink></li>
-     <li><NavLink to="/findAJob">Find A Job</NavLink></li>
-     <li><NavLink to="/recruiters">Recruiters</NavLink></li>
-     <li><NavLink to="/candidates">Candidates</NavLink></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/findAJob">Find A Job</NavLink></li>
+        <li><NavLink to="/recruiters">Recruiters</NavLink></li>
+        <li><NavLink to="/candidates">Candidates</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -29,8 +48,14 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
-                <NavLink className="btn" to="/register">Register</NavLink>
-                <NavLink className="btn btn-info" to="/login">Log in</NavLink>
+                {
+                    user ? <div className="flex items-center gap-1.5 font-semibold">
+                        <p>{user.email}</p>
+                        <button onClick={handleLogOut} className="btn btn-accent">Log Out</button>
+                    </div> :
+                        <><NavLink className="btn" to="/register">Register</NavLink>
+                            <NavLink className="btn btn-info" to="/login">Log in</NavLink></>
+                }
             </div>
         </div>
     );
