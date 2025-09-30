@@ -3,6 +3,7 @@ import LoginLottie from "../../assets/LottieFiles/Login.json"
 import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 const LogIn = () => {
 
       const { logIn } = use(AuthContext);
@@ -45,12 +46,13 @@ const LogIn = () => {
                         <form onSubmit={handleLogIn}>
                             <fieldset className="fieldset">
                                 <label className="label">Email</label>
-                                <input name="email" type="email" className="input" placeholder="Email" />
+                                <input name="email" type="email" className="input w-full" placeholder="Email" />
                                 <label className="label">Password</label>
-                                <input name="password" type="password" className="input" placeholder="Password" />
+                                <input name="password" type="password" className="input w-full" placeholder="Password" />
                                 <button className="btn btn-neutral mt-4">Log in</button>
                             </fieldset>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

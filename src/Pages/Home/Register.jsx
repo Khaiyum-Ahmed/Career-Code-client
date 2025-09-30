@@ -3,6 +3,7 @@ import RegisterLottie from "../../assets/LottieFiles/Register.json"
 import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Shared/LogIn/SocialLogin";
 const Register = () => {
     const { signUp } = use(AuthContext);
 
@@ -31,6 +32,7 @@ const Register = () => {
                 console.log(error)
             })
     }
+   
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -43,15 +45,17 @@ const Register = () => {
                         <form onSubmit={handleRegister}>
                             <fieldset className="fieldset">
                                 <label className="label">Email</label>
-                                <input name="email" type="email" className="input" placeholder="Email" />
+                                <input name="email" type="email" className="input w-full" placeholder="Email" />
                                 <label className="label">Password</label>
-                                <input name="password" type="password" className="input" placeholder="Password" />
+                                <input name="password" type="password" className="input w-full" placeholder="Password" />
                                 <button className="btn btn-neutral mt-4">Register</button>
                             </fieldset>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 };
