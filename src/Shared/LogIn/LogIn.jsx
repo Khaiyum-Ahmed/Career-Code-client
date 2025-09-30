@@ -4,9 +4,13 @@ import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
+import { useLocation, useNavigate } from "react-router";
 const LogIn = () => {
 
       const { logIn } = use(AuthContext);
+      const location = useLocation();
+      const navigate = useNavigate();
+      const from = location.state || '/';
     
         const handleLogIn = e => {
             e.preventDefault();
@@ -28,6 +32,7 @@ const LogIn = () => {
                         timer: 1500
                     });
                     form.reset();
+                    navigate(from);
                 })
                 .catch(error=>{
                     console.log(error)
@@ -52,7 +57,7 @@ const LogIn = () => {
                                 <button className="btn btn-neutral mt-4">Log in</button>
                             </fieldset>
                         </form>
-                        <SocialLogin></SocialLogin>
+                        <SocialLogin from={from}></SocialLogin>
                     </div>
                 </div>
             </div>

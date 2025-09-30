@@ -1,9 +1,11 @@
 import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
-const SocialLogin = () => {
-    const { googleLogIn } = use(AuthContext)
+const SocialLogin = ({from}) => {
+    const { googleLogIn } = use(AuthContext);
+    const navigate = useNavigate();
     // Google log in
     const handleGoogleLogIn = () => {
         googleLogIn()
@@ -16,6 +18,7 @@ const SocialLogin = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate(from || "/")
             })
             .catch(error => {
                 console.log(error)
