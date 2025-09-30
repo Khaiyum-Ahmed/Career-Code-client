@@ -3,7 +3,7 @@ import team1 from "../../assets/images/tim-van-der-kuip-CPs2X8JYmS8-unsplash.jpg
 import team2 from "../../assets/images/vitaly-gariev-Kxo17w7BurY-unsplash.jpg"
 const Banner = () => {
     return (
-        <div className="hero bg-base-200 min-h-screen">
+        <div className="hero bg-base-200 py-24">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="flex-1">
                     <Motion.img
