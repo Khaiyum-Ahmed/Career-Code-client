@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext/AuthContext";
 import { use } from "react";
 import Swal from "sweetalert2";
+import { motion as Motion } from "motion/react"
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
@@ -40,7 +41,10 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Career_Code</a>
+                <Motion.a animate={{
+                    color:['#F54927','#F5A627','#3CF527','#27F5D6','#278EF5','#3527F5','#AD27F5','#F527E7'],
+                    transition:{duration:4, repeat:Infinity}
+                }} className="btn btn-ghost text-xl">Career_Code</Motion.a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
