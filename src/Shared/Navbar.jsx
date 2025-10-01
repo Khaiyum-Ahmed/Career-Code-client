@@ -24,14 +24,22 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/findAJob">Find A Job</NavLink></li>
         <li><NavLink to="/recruiters">Recruiters</NavLink></li>
         <li><NavLink to="/candidates">Candidates</NavLink></li>
+        {/* for applicant links, check roles as well */}
         {
             user && <>
             <li><NavLink to="/myApplications">My Applications</NavLink></li>
             </>
         }
+        {/* for recruiter. check role as well */}
+        {
+            user && <>
+            <li><NavLink to="/addJob">Add Job</NavLink></li>
+            </>
+        }
+    
+
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
