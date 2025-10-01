@@ -1,13 +1,23 @@
 import { Form } from "react-router";
+import UseAuth from "../../Hooks/UseAuth";
 
 const AddJobs = () => {
+    const {user}= UseAuth();
     
     const handleAddJob = e=>{
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries())
-        console.log(data)
+        const data = Object.fromEntries(formData.entries());
+        // process salary range data
+        const {currency, minSalary, maxSalary, ...allData}= data;
+        allData.salaryRange = {minSalary, maxSalary, currency};
+
+        // process requirements
+        allData.requirements = allData.requirements.split(',').map(req=>req.trim());
+        // process responsibilities
+        allData.responsibilities = allData.responsibilities.split(',').map(resp=>resp.trim())
+        console.log(allData)
     }
     return (
         <div className="py-20">
@@ -33,9 +43,9 @@ const AddJobs = () => {
                         <legend className="fieldset-legend">Job Type</legend>
                         <div className="filter">
                             <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                            <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
-                            <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                            <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
+                            <input className="btn" type="radio" name="jobType" value="On-Site" aria-label="On-Site" />
+                            <input className="btn" value="Remote" type="radio" name="jobType" aria-label="Remote" />
+                            <input className="btn" value="Hybrid" type="radio" name="jobType" aria-label="Hybrid" />
                         </div>
 
                     </fieldset>
@@ -105,7 +115,7 @@ const AddJobs = () => {
 
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4">
                         <legend className="fieldset-legend">Job Responsibilities</legend>
-                        <textarea className="textarea w-full" name="Responsibilities" placeholder="Job Responsibilities (separate by comma)"></textarea>
+                        <textarea className="textarea w-full" name="responsibilities" placeholder="Job Responsibilities (separate by comma)"></textarea>
 
                     </fieldset>
                     {/* HR related info */}
@@ -116,7 +126,7 @@ const AddJobs = () => {
                         <input type="text" name="hr_name" className="input w-full" placeholder="HR Name" />
 
                         <label className="label">HR Email</label>
-                        <input type="email" name="hr_email" className="input w-full" placeholder="HR Email" />
+                        <input type="email" readOnly defaultValue={user.email} name="hr_email" className="input w-full" placeholder="HR Email" />
 
                     </fieldset>
 
