@@ -27,6 +27,11 @@ const Navbar = () => {
         <li><NavLink to="/findAJob">Find A Job</NavLink></li>
         <li><NavLink to="/recruiters">Recruiters</NavLink></li>
         <li><NavLink to="/candidates">Candidates</NavLink></li>
+        {
+            user && <>
+            <li><NavLink to="/myApplications">My Applications</NavLink></li>
+            </>
+        }
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
