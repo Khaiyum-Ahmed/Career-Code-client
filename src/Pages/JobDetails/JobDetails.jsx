@@ -3,7 +3,7 @@ import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
 import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
-    const { _id, title, location, jobType, category, salaryRange, description, company, requirements, responsibilities, hr_email, hr_name, company_logo } = useLoaderData();
+    const { _id, title, location, jobType, category, salaryRange, description, company, requirements, responsibilities, hr_email, hr_name, company_logo, deadline } = useLoaderData();
     return (
         <div className="py-12">
             <h1 className="text-5xl font-bold text-center">Details of: {title}</h1>
@@ -23,7 +23,7 @@ const JobDetails = () => {
                 <div className="card-body">
                     <h2 className="card-title">
                         {title}
-                        <div className="badge badge-secondary">NEW</div>
+                        <div className="badge badge-secondary">{deadline}</div>
                     </h2>
                     <div className="flex items-center justify-between">
                         <h4 className="font-semibold ">Job Type: {jobType}</h4>

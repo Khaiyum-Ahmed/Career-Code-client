@@ -1,23 +1,46 @@
 import { Form } from "react-router";
 import UseAuth from "../../Hooks/UseAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJobs = () => {
-    const {user}= UseAuth();
-    
-    const handleAddJob = e=>{
+    const { user } = UseAuth();
+
+    const handleAddJob = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         // process salary range data
-        const {currency, minSalary, maxSalary, ...allData}= data;
-        allData.salaryRange = {minSalary, maxSalary, currency};
+        const { currency, minSalary, maxSalary, ...allData } = data;
+        allData.salaryRange = { minSalary, maxSalary, currency };
 
         // process requirements
-        allData.requirements = allData.requirements.split(',').map(req=>req.trim());
+        allData.requirements = allData.requirements.split(',').map(req => req.trim());
         // process responsibilities
-        allData.responsibilities = allData.responsibilities.split(',').map(resp=>resp.trim())
+        allData.responsibilities = allData.responsibilities.split(',').map(resp => resp.trim())
+        // status
+        allData.status = "active";
         console.log(allData)
+
+        // save job to the database
+        axios.post('http://localhost:3000/jobs', allData)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "This new job has been Saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset()
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div className="py-20">
@@ -67,7 +90,7 @@ const AddJobs = () => {
 
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4">
                         <legend className="fieldset-legend">Application Deadline</legend>
-                        <input type="date" name="date" className="input w-full" />
+                        <input type="date" name="deadline" className="input w-full" />
 
                     </fieldset>
                     {/* Salary Range */}
